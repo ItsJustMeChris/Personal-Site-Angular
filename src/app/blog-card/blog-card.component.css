@@ -1,0 +1,59 @@
+:host.night {
+  background: #000000;
+  color: #ffffff;
+}
+:host .card-content.night {
+  background: #000000;
+  color: #ffffff;
+}
+:host {
+  min-height: 300px;
+  display: flex;
+  margin: 1em;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  background-size: cover;
+  width: 30%;
+  flex-direction: column;
+  cursor: pointer;
+  transition: 0.2s;
+  justify-content: space-between;
+}
+:host:hover,
+:host:focus {
+  transition: 0.2s;
+  transform: scale(1.1);
+}
+:host h1 {
+  font-size: 1.7em;
+  padding: 0;
+  margin: 0;
+}
+:host main {
+  font-size: 1.3em;
+  overflow: hidden;
+}
+:host img {
+  object-fit: cover;
+  max-height: 300px;
+}
+:host .card-content {
+  padding: 1em;
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff;
+}
+:host footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 1400px) {
+  :host {
+    flex: 1 1 45%;
+  }
+}

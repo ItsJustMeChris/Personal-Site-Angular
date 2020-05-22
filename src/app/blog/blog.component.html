@@ -1,0 +1,12 @@
+<section class="blog">
+  <app-blog-card
+    tabindex="0"
+    *ngFor="let post of blogPosts"
+    [author]="post.author"
+    [content]="post.content"
+    [image]="post.image"
+    [postTime]="post.postTime"
+    [slug]="post.slug"
+    [title]="post.title"
+  ></app-blog-card>
+</section>

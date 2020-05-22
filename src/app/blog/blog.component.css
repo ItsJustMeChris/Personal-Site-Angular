@@ -1,0 +1,21 @@
+section.blog {
+  display: flex;
+  margin: auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 70%;
+  position: relative;
+  margin-top: -4em;
+  padding-bottom: 4em;
+}
+
+@media only screen and (max-width: 1400px) {
+  section.blog {
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+  }
+}

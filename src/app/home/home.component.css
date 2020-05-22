@@ -1,0 +1,56 @@
+.profile {
+  --background: #00adff;
+  background: var(--background);
+  display: flex;
+  flex-direction: column;
+  padding: 5em;
+  color: #fff;
+  height: 40%;
+}
+img.avatar {
+  height: 10em;
+  width: 10em;
+  margin: auto;
+}
+.about-text {
+  font-size: 3rem;
+  text-align: center;
+  height: 25px;
+  z-index: 1000;
+}
+.social-icons {
+  text-align: center;
+  font-size: 3rem;
+  z-index: 1000;
+}
+.social-icons a i {
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+}
+.social-icons a i:hover,
+.social-icons a:focus,
+.social-icons a i:focus {
+  color: #dddddd;
+  transition: 0.3s;
+}
+.social-icons a {
+  padding: 0.2em;
+}
+
+.wave {
+    margin-top: -22%;
+    z-index: 0;
+}
+
+@media only screen and (max-width: 1400px) {
+  .about-text {
+    height: 70px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .about-text {
+    height: 110px;
+  }
+}
