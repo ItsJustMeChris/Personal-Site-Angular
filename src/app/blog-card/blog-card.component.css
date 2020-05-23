@@ -19,8 +19,8 @@
   transition: 0.2s;
   justify-content: space-between;
 }
-:host:hover,
-:host:focus {
+:host.normal:hover,
+:host.normal:focus {
   transition: 0.2s;
   transform: scale(1.1);
 }
@@ -52,6 +52,24 @@
   display: flex;
   justify-content: space-between;
 }
+
+:host article.blog-content ::ng-deep img {
+  width: 50%;
+}
+
+:host article {
+  margin-top: 1em;
+  border-top: 2px solid #c5c5c5;
+  font-size: 1.2em;
+  line-height: 1em;
+}
+
+:host.full {
+  width: 100%;
+  position: absolute;
+  z-index: 10000;
+}
+
 @media only screen and (max-width: 1400px) {
   :host {
     flex: 1 1 45%;

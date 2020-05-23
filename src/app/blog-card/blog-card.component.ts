@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ElementRef, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-blog-card',
@@ -15,9 +15,12 @@ export class BlogCardComponent implements OnInit {
   @Input() slug: string;
   @Input() title: string;
 
-  constructor() { }
+  showContent: boolean = false;
 
-  ngOnInit(): void { }
+  constructor(private element: ElementRef) { }
+
+  ngOnInit(): void {
+  }
 
   getReadTime(): number {
     return Math.ceil(this.content.split(' ').length / 200);
@@ -45,4 +48,21 @@ export class BlogCardComponent implements OnInit {
     return `${Math.floor(seconds)} seconds ago`;
   }
 
+  @HostListener("click") onClick() {
+    this.showContent = true;
+  }
+
+  @HostBinding('class')
+  get full() {
+    return this.showContent ? 'full' : 'normal';
+  };
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (this.element.nativeElement.contains(event.target)) {
+      this.showContent = true;
+    } else {
+      this.showContent = false;
+    }
+  }
 }

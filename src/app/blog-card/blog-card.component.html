@@ -1,8 +1,9 @@
-  <img src="{{image}}" alt="Card Image For Blog Post Titled {{title}}">
-  <div class="card-content">
-    <h1>{{title}}</h1>
-    <footer>
-      <aside>{{author}}</aside>
-      <aside>{{getReadTime()}} min read - {{timeAgo()}}</aside>
-    </footer>
-  </div>
+<img src="{{image}}" alt="Card Image For Blog Post Titled {{title}}">
+<div class="card-content">
+  <h1>{{title}}</h1>
+  <footer>
+    <aside>{{author}}</aside>
+    <aside>{{getReadTime()}} min read - {{timeAgo()}}</aside>
+  </footer>
+  <article class="blog-content" [style.display]="showContent ? 'block' : 'none'" [innerHTML]="content"></article>
+</div>

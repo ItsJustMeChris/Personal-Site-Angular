@@ -14,7 +14,15 @@ export class HomeComponent implements OnInit {
     "I make the impossible",
   ];
 
+  background: string;
+
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.background = this.getColor();
+  }
+
+  getColor(): string {
+    return `hsl(${360 * Math.random()}, ${Math.random() * (80 - 25) + 25}%, ${Math.random() * (60 - 45) + 45}%)`;
+  }
 }
