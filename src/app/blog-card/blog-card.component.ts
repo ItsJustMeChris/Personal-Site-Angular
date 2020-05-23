@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, HostListener, ElementRef, HostBinding } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog-card',
@@ -17,7 +18,7 @@ export class BlogCardComponent implements OnInit {
 
   showContent: boolean = false;
 
-  constructor(private element: ElementRef) { }
+  constructor(private element: ElementRef, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -48,21 +49,20 @@ export class BlogCardComponent implements OnInit {
     return `${Math.floor(seconds)} seconds ago`;
   }
 
-  @HostListener("click") onClick() {
-    this.showContent = true;
-  }
-
   @HostBinding('class')
   get full() {
     return this.showContent ? 'full' : 'normal';
   };
 
+  // You will need a shared service to store the state of what is actually open/clased to not hide the slug improperly like it will without.
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if (this.element.nativeElement.contains(event.target)) {
       this.showContent = true;
+      this.router.navigate([`/blog/${this.slug}`]);
     } else {
       this.showContent = false;
+      this.router.navigate([`/`]);
     }
   }
 }
