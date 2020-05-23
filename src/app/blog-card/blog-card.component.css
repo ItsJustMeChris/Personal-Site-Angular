@@ -54,7 +54,8 @@
 }
 
 :host article.blog-content ::ng-deep img {
-  width: 50%;
+  max-width: 100%;
+  height: auto;
 }
 
 :host article {
