@@ -12,6 +12,9 @@ export class BlogComponent implements OnInit {
 
   constructor(public blog: BlogService, private route: ActivatedRoute, private router: Router) { }
 
+  // Check blogPosts for slug if slug is present, we want to load that element first,
+  // Once loaded, we load the page of blog posts, filter out and reorder based on time,
+  // If slug is not found, we navigate to the 404 page, not just replace the location since, this is a missing page.
   ngOnInit(): void {
     this.blog.getBlogPosts(0).subscribe(data => this.blogPosts = data);
   }
