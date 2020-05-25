@@ -30,13 +30,11 @@ export class BlogService {
 
   getBlogPosts(page: number): Observable<BlogPost[]> {
     const posts = this.http.get<BlogPost[]>(`${endpoint}/blog/paginate/${page}`);
-    console.log(posts);
     return posts;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.log(error);
       return of(result as T);
     }
   }

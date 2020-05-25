@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, HostListener, ElementRef, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
+import { BlogCardService } from '../blog-card.service';
 
 @Component({
   selector: 'app-blog-card',
@@ -17,10 +18,12 @@ export class BlogCardComponent implements OnInit {
   @Input() title: string;
 
   showContent: boolean = false;
+  card: string = '';
 
-  constructor(private element: ElementRef, private router: Router) { }
+  constructor(private element: ElementRef, public service: BlogCardService, private router: Router) { }
 
   ngOnInit(): void {
+    this.service.card.subscribe(data => this.card = data);
   }
 
   getReadTime(): number {
@@ -54,15 +57,17 @@ export class BlogCardComponent implements OnInit {
     return this.showContent ? 'full' : 'normal';
   };
 
-  // You will need a shared service to store the state of what is actually open/clased to not hide the slug improperly like it will without.
   @HostListener('document:click', ['$event'])
   clickout(event) {
+    console.log(`Card ${this.card}, SLUG ${this.slug}`);
     if (this.element.nativeElement.contains(event.target)) {
+      this.service.setCurrentCard(this.slug);
       this.showContent = true;
       this.router.navigate([`/blog/${this.slug}`]);
-    } else {
+    } else if (this.slug === this.card) {
+      this.service.setCurrentCard('');
       this.showContent = false;
-      this.router.navigate([`/`]);
+      this.router.navigate(['/']);
     }
   }
 }

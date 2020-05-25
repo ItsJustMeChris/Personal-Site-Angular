@@ -13,13 +13,6 @@ export class BlogComponent implements OnInit {
   constructor(public blog: BlogService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.getBlogPosts(0);
-  }
-
-  getBlogPosts(page: number) {
-    this.blog.getBlogPosts(page).subscribe((data: {}) => {
-      this.blogPosts = data;
-      console.log(this.blogPosts);
-    });
+    this.blog.getBlogPosts(0).subscribe(data => this.blogPosts = data);
   }
 }
