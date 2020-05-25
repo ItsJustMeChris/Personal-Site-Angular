@@ -59,8 +59,8 @@ export class BlogCardComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    console.log(`Card ${this.card}, SLUG ${this.slug}`);
-    if (this.element.nativeElement.contains(event.target)) {
+    if (this.slug === this.card && this.element.nativeElement.contains(event.target)) return false;
+    if (this.slug !== this.card && this.element.nativeElement.contains(event.target)) {
       this.service.setCurrentCard(this.slug);
       this.showContent = true;
       this.router.navigate([`/blog/${this.slug}`]);
