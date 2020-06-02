@@ -18,6 +18,7 @@
   cursor: pointer;
   transition: 0.2s;
   justify-content: space-between;
+  left: initial;
 }
 :host.normal:hover,
 :host.normal:focus {
