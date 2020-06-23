@@ -1,80 +1,59 @@
-:host.night {
-  background: #000000;
-  color: #ffffff;
-}
-:host .card-content.night {
-  background: #000000;
-  color: #ffffff;
-}
-:host {
-  min-height: 300px;
-  display: flex;
-  margin: 1em;
-  border-radius: 5px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-  background-size: cover;
-  width: 30%;
-  flex-direction: column;
-  cursor: pointer;
-  transition: 0.2s;
-  justify-content: space-between;
-  left: initial;
-}
-:host.normal:hover,
-:host.normal:focus {
-  transition: 0.2s;
-  transform: scale(1.1);
-}
-:host h1 {
-  font-size: 1.7em;
-  padding: 0;
-  margin: 0;
-}
-:host main {
-  font-size: 1.3em;
-  overflow: hidden;
-}
-:host img {
-  object-fit: cover;
-  max-height: 300px;
-}
-:host .card-content {
-  padding: 1em;
-  display: flex;
-  height: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #ffffff;
-}
-:host footer {
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
+:host  {
+    display: flex;
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    transition: .2s; 
+    z-index: 1;
 }
 
-:host article.blog-content ::ng-deep img {
-  max-width: 100%;
-  height: auto;
+.image {
+    width: 150px;
 }
 
-:host article {
-  margin-top: 1em;
-  border-top: 2px solid #c5c5c5;
-  font-size: 1.2em;
-  line-height: 1em;
+:host .left {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5%;
 }
 
-:host.full {
-  width: 100%;
-  position: absolute;
-  z-index: 10000;
-  margin: unset;
+:host.dark {
+    background: #E5989B;
 }
 
-@media only screen and (max-width: 1400px) {
-  :host {
-    flex: 1 1 45%;
-  }
+:host.light {
+    background: #FFCDB2;
+}
+
+:host .right {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding-right: 5%;
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+}
+
+p.title {
+    font-size: 1.5em;
+    line-height: 1.4em;
+}
+
+p.smaller {
+    font-size: 1em;
+}
+
+:host:hover {
+    transition: .2s;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    position: relative;
+    z-index: 999;
+    cursor: pointer;
 }

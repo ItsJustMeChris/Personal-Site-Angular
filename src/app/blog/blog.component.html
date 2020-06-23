@@ -1,12 +1,9 @@
-<section class="blog">
-  <app-blog-card
-    tabindex="0"
-    *ngFor="let post of blogPosts"
-    [author]="post.author"
-    [content]="post.content"
-    [image]="post.image"
-    [postTime]="post.postTime"
-    [slug]="post.slug"
-    [title]="post.title"
-  ></app-blog-card>
-</section>
+<app-blog-card
+  *ngFor="let post of blogPosts; index as i; even as isEven; odd as isOdd"
+  [class]="isEven ? 'dark' : 'light'"
+  [author]="post.author"
+  [content]="post.content"
+  [image]="post.image"
+  [postTime]="post.postTime"
+  [slug]="post.slug"
+  [title]="post.title"></app-blog-card>

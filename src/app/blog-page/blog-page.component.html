@@ -1,0 +1,14 @@
+<a routerLink="/" class="close"><i class="fas fa-times"></i></a>
+<header>
+    <p class="titillium semibold title">{{blogPost.title}}</p>
+    <div class="meta">
+        <p class="time-ago">4 Months Ago</p>
+        <p class="read-time">5 Minute Read</p>
+    </div>
+    <img
+        src="https://api.itschris.dev/public/images/supreme-volleyball-responsible.jpg"
+        alt="Image">
+</header>
+<main [innerHtml]="blogPost.content">
+</main>
+<app-footer></app-footer>

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, HostListener, ElementRef, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
-import { BlogCardService } from '../blog-card.service';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -22,16 +21,9 @@ export class BlogCardComponent implements OnInit {
   showContent: boolean;
   card: string = '';
 
-  constructor(private element: ElementRef, public service: BlogCardService, private router: Router, private route: ActivatedRoute, private location: Location) { }
+  constructor(private element: ElementRef, private router: Router, private location: Location) { }
 
   ngOnInit(): void {
-    this.service.card.subscribe(data => this.card = data);
-    if (this.route.snapshot.paramMap.get('slug') === this.slug) {
-      this.service.setCurrentCard(this.slug);
-      this.showContent = true;
-      this.location.replaceState(`/blog/${this.slug}`);
-      this.element.nativeElement.focus();
-    }
   }
 
   getReadTime(): number {
@@ -65,17 +57,9 @@ export class BlogCardComponent implements OnInit {
     return this.showContent ? 'full' : 'normal';
   };
 
-  @HostListener('document:click', ['$event'])
-  clickout(event) {
-    if (this.slug === this.card && this.element.nativeElement.contains(event.target)) return false;
-    if (this.slug !== this.card && this.element.nativeElement.contains(event.target)) {
-      this.service.setCurrentCard(this.slug);
-      this.showContent = true;
-      this.location.replaceState(`/blog/${this.slug}`);
-    } else if (this.slug === this.card) {
-      this.service.setCurrentCard('');
-      this.showContent = false;
-      this.location.replaceState('');
-    }
+  @HostListener('click', ['$event'])
+  onClick(e) {
+    this.router.navigate([`/blog/${this.slug}`]);
+    window.scroll(0, 0);
   }
 }

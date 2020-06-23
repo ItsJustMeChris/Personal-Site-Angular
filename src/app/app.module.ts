@@ -8,6 +8,9 @@ import { BlogCardComponent } from './blog-card/blog-card.component';
 import { BlogComponent } from './blog/blog.component';
 import { HomeComponent } from './home/home.component';
 import { TyperComponent } from './typer/typer.component';
+import { BlogPageComponent } from './blog-page/blog-page.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { TyperComponent } from './typer/typer.component';
     BlogCardComponent,
     BlogComponent,
     HomeComponent,
-    TyperComponent
+    TyperComponent,
+    BlogPageComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

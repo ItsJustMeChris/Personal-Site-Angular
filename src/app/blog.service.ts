@@ -25,12 +25,23 @@ export interface BlogPost {
 })
 
 export class BlogService {
-
+  private cache = [];
   constructor(private http: HttpClient) { }
 
-  getBlogPosts(page: number): Observable<BlogPost[]> {
-    const posts = this.http.get<BlogPost[]>(`${endpoint}/blog/paginate/${page}`);
-    return posts;
+  async getBlogPosts(page: number): Promise<BlogPost[]> {
+    if (this.cache[page]) return [...this.cache[page]];
+    const posts = await this.http.get<BlogPost[]>(`${endpoint}/blog/paginate/${page}`).toPromise();
+    this.cache[page] = [];
+    posts.forEach((post) => this.cache[page].push(post));
+    return this.cache[page];
+  }
+
+  async getBlogPost(slug: string): Promise<BlogPost> {
+    const cached = this.cache.filter((post) => post.slug === slug);
+    console.log(cached, slug)
+    if (cached.length > 0) return cached[0];
+    const post = await this.http.get<BlogPost>(`${endpoint}/blog/post/${slug}`).toPromise();
+    return post;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

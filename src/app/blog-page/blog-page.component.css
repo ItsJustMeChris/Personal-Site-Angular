@@ -1,0 +1,72 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #FFCDB2;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+p.title {
+    font-size: 3em;
+    line-height: 1em;
+    margin: unset;
+    margin-top: 1em;
+    text-align: center;
+}
+
+.meta {
+    display: flex;
+    width: 250px;
+    justify-content: space-between;
+}
+
+header img {
+    object-fit: cover;
+    height: 200px;
+    width: 70%;
+}
+
+main {
+    margin-top: 3em;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-family: 'Titillium';
+    min-height: 100vh;
+}
+
+main >>> img {
+    max-width: 100%;
+    height: auto;
+}
+
+main >>> p {
+    font-size: 1.3em;
+    line-height: 1.6em;
+}
+
+a.close {
+    display: block;
+    position: absolute;
+    left: 0.5em;
+    top: 0.5em;
+    border: unset;
+    background: unset;
+    color: #FFFFFF;
+    font-size: 2.5em;
+    transition: .2s;
+    cursor: pointer;
+}
+
+a.close:hover {
+    transition: .2s;
+    color: #ff6961;
+}
