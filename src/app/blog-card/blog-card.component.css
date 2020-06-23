@@ -57,3 +57,18 @@ p.smaller {
     z-index: 999;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 600px) {
+    :host .left {
+        display: none;
+    }
+
+    :host .right {
+        width: 100%;
+        padding-left: 5%;
+    }
+
+    .meta {
+        width: 200px;
+    }
+}

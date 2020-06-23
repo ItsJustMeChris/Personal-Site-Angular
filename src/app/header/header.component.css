@@ -73,3 +73,26 @@ p.social-icons {
     justify-content: space-between;
     width: 200px;
 }
+
+@media only screen and (max-width: 600px) {
+    section.bottom {
+        flex-direction: column;
+    }
+    
+    :host .bottom > .left {
+        width: 100%;
+    }
+
+    :host .bottom > .right {
+        width: 100%;
+    }
+
+    p.large {
+        font-size: 2em;
+    }  
+
+    p.larger {
+        font-size: 3em;
+        line-height: 1em;
+    }
+}
