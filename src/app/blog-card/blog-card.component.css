@@ -49,6 +49,10 @@ p.smaller {
     font-size: 1em;
 }
 
+p {
+    color: #6D6875;
+}
+
 :host:hover {
     transition: .2s;
     padding-top: 60px;
