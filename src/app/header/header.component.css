@@ -1,99 +1,112 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    background: #FFCDB2;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background: #ffcdb2;
+  justify-content: space-around;
 }
 
 section.top {
-    padding-left: 5%;
-    padding-right: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 p.larger {
-    font-size: 3.5em;
-    line-height: 1em;
+  font-size: 3.5em;
+  line-height: 1em;
 }
 
 p.offset {
-    margin-left: 2em;
-    margin-top: -1em;
+  margin-left: 2em;
+  margin-top: -1em;
 }
 
 section.bottom {
-    padding-left: 5%;
-    padding-right: 5%;
-    display: flex;
-    justify-content: space-between;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  justify-content: space-between;
+}
+
+section.middle {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+section.middle p {
+  margin: unset;
 }
 
 .left {
-    width: 50%;
+  width: 50%;
 }
 
 .right {
-    width: 40%;
+  width: 40%;
 }
 
 p.large {
-    font-size: 3em;
+  font-size: 3em;
 }
 
 span.tint {
-    color: #E5989B;
+  color: #e5989b;
 }
 
 p {
-    font-size: 1.5em;
-    line-height: 1.4em;
-    color: #6D6875;
+  font-size: 1.5em;
+  line-height: 1.4em;
+  color: #6d6875;
 }
 
 a.tint {
-    color: #E5989B;
-    text-decoration: none;
-    font-size: 1.2em;
-    transition: .2s;
+  color: #e5989b;
+  text-decoration: none;
+  font-size: 1.2em;
+  transition: 0.2s;
 }
 
 a.tint:hover {
-    color: #ffffff;
-    transition: .2s;
+  color: #ffffff;
+  transition: 0.2s;
 }
 
 a.tint:focus {
-    color: #ffffff;
-    transition: .2s;
+  color: #ffffff;
+  transition: 0.2s;
 }
 
 p.social-icons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 200px;
 }
 
 @media only screen and (max-width: 600px) {
-    section.bottom {
-        flex-direction: column;
-    }
-    
-    :host .bottom > .left {
-        width: 100%;
-    }
+  section.bottom {
+    flex-direction: column;
+  }
 
-    :host .bottom > .right {
-        width: 100%;
-    }
+  :host .bottom > .left {
+    width: 100%;
+  }
 
-    p.large {
-        font-size: 2em;
-    }  
+  :host .bottom > .right {
+    width: 100%;
+  }
 
-    p.larger {
-        font-size: 3em;
-        line-height: 1em;
-    }
+  p.large {
+    font-size: 2em;
+  }
+
+  p.larger {
+    font-size: 3em;
+    line-height: 1em;
+  }
+}
+
+.mr {
+  margin-right: 0.5em;
 }
