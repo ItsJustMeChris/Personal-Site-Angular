@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogService, BlogPost } from '../blog.service';
+import { BlogService, BlogPost, BlogPostResponse } from '../blog.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BlogPageComponent implements OnInit {
   private blog: BlogService;
-  blogPost: BlogPost;
+  public blogPost: BlogPostResponse;
 
   constructor(blog: BlogService, private route: ActivatedRoute) {
     this.blog = blog;

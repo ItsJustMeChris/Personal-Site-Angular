@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
-const endpoint = "https://api.itschris.dev/api/v1";
+const endpoint = "https://api.itschris.dev";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,32 +15,56 @@ export interface BlogPost {
   author: string;
   content: string;
   image: string;
-  postTime: string;
+  createdAt: string;
+  updatedAt: string;
+  userName: string;
   slug: string;
   title: string;
 }
+
+export interface BlogPostsResponse extends Response {
+  limit: number;
+  message: string;
+  page: number;
+  posts: BlogPost[];
+  status: string;
+  total: number;
+}
+
+export interface User {
+  name: string;
+}
+
+export interface Response {
+  message: string;
+  status: string;
+  code?: number;
+}
+
+export interface BlogPostResponse extends Response {
+  post: BlogPost;
+  user: User;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class BlogService {
-  private cache = [];
+  private cache: BlogPostsResponse[] = [];
   constructor(private http: HttpClient) { }
 
-  async getBlogPosts(page: number): Promise<BlogPost[]> {
-    if (this.cache[page]) return [...this.cache[page]];
-    const posts = await this.http.get<BlogPost[]>(`${endpoint}/blog/paginate/${page}`).toPromise();
-    this.cache[page] = [];
-    posts.forEach((post) => this.cache[page].push(post));
-    return this.cache[page];
+  async getBlogPosts(page: number): Promise<BlogPostsResponse> {
+    const cachedPage = this.cache.filter((res: BlogPostsResponse) => res.page == page)[0];
+    if (cachedPage) return cachedPage;
+    const posts: BlogPostsResponse = await this.http.get<BlogPostsResponse>(`${endpoint}/post?page=${page}`).toPromise();
+    this.cache.push(posts);
+    return posts;
   }
 
-  async getBlogPost(slug: string): Promise<BlogPost> {
-    const cached = this.cache.filter((post) => post.slug === slug);
-    console.log(cached, slug)
-    if (cached.length > 0) return cached[0];
-    const post = await this.http.get<BlogPost>(`${endpoint}/blog/post/${slug}`).toPromise();
+  async getBlogPost(slug: string): Promise<BlogPostResponse> {
+    const post = await this.http.get<BlogPostResponse>(`${endpoint}/post/slug/${slug}`).toPromise();
     return post;
   }
 

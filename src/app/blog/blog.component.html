@@ -1,9 +1,17 @@
-<app-blog-card
-  *ngFor="let post of blogPosts; index as i; even as isEven; odd as isOdd"
-  [class]="isEven ? 'dark' : 'light'"
-  [author]="post.author"
-  [content]="post.content"
-  [image]="post.image"
-  [postTime]="post.postTime"
-  [slug]="post.slug"
-  [title]="post.title"></app-blog-card>
+<ng-container *ngIf="blogPosts">
+  <app-blog-card
+    *ngFor="
+      let post of blogPosts.posts;
+      index as i;
+      even as isEven;
+      odd as isOdd
+    "
+    [class]="isEven ? 'dark' : 'light'"
+    [author]="post.author"
+    [content]="post.content"
+    [image]="post.image"
+    [postTime]="post.createdAt"
+    [slug]="post.slug"
+    [title]="post.title"
+  ></app-blog-card>
+</ng-container>

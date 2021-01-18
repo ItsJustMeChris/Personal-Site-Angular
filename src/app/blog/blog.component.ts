@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BlogService, BlogPost } from '../blog.service';
+import { BlogService, BlogPost, BlogPostsResponse } from '../blog.service';
 
 @Component({
   selector: 'app-blog',
@@ -8,7 +8,7 @@ import { BlogService, BlogPost } from '../blog.service';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
-  blogPosts: BlogPost[];
+  blogPosts: BlogPostsResponse;
   loadedPosts: Promise<boolean>;
 
   constructor(public blog: BlogService, private route: ActivatedRoute, private router: Router) { }
@@ -18,6 +18,7 @@ export class BlogComponent implements OnInit {
   // If slug is not found, we navigate to the 404 page, not just replace the location since, this is a missing page.
   async ngOnInit(): Promise<any> {
     this.blogPosts = await this.blog.getBlogPosts(0);
+    console.log(this.blogPosts);
     this.loadedPosts = Promise.resolve(true);
     console.log(await this.loadedPosts);
     console.log(this.blogPosts);

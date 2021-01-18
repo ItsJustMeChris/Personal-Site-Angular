@@ -19,22 +19,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  async fetchSong() {
-    const data = await this.spotifyService.getNowPlaying();
-    if (!data?.is_playing) {
-      this.song = null;
-      this.artistsString = null;
-      return false;
-    }
-    this.song = data?.item;
-    this.artistsString = this.song.artists.map((artist) => artist.name).join(', ');
-  }
-
-  async ngOnInit() {
-    this.fetchSong();
-    setInterval(() => {
-      this.fetchSong();
-    }, 60000);
-  }
+  async ngOnInit() { }
 
 }
