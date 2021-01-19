@@ -12,9 +12,7 @@ export class BlogResolver implements Resolve<Array<BlogPostResponse | BlogPostsR
   public async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<any> {
     const slug = route.paramMap.get('slug');
     if (slug) {
-      console.log('start')
       await this.blogService.getBlogPost(slug);
-      console.log('end');
       return true;
     }
     return await this.blogService.getBlogPosts(0);

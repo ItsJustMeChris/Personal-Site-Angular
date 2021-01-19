@@ -18,7 +18,6 @@ export class BlogPageComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<any> {
-    console.log('buid');
     const slug = this.route.snapshot.paramMap.get('slug');
     this.blogPost = await this.blog.getBlogPost(slug);
   }
