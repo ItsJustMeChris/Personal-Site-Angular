@@ -7,11 +7,6 @@
       odd as isOdd
     "
     [class]="isEven ? 'dark' : 'light'"
-    [author]="post.author"
-    [content]="post.content"
-    [image]="post.image"
-    [postTime]="post.createdAt"
-    [slug]="post.slug"
-    [title]="post.title"
+    [blogPost]="post"
   ></app-blog-card>
 </ng-container>

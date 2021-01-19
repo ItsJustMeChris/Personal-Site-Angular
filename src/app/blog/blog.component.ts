@@ -18,9 +18,6 @@ export class BlogComponent implements OnInit {
   // If slug is not found, we navigate to the 404 page, not just replace the location since, this is a missing page.
   async ngOnInit(): Promise<any> {
     this.blogPosts = await this.blog.getBlogPosts(0);
-    console.log(this.blogPosts);
     this.loadedPosts = Promise.resolve(true);
-    console.log(await this.loadedPosts);
-    console.log(this.blogPosts);
   }
 }

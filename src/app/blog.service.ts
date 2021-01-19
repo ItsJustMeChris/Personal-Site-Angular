@@ -46,6 +46,31 @@ export interface BlogPostResponse extends Response {
   user: User;
 }
 
+export function getReadTime(blogPost: BlogPost): number {
+  return Math.ceil(blogPost.content.split(' ').length / 200);
+}
+
+export function timeAgo(blogPost: BlogPost): string {
+  const now = new Date().getTime();
+  const then = new Date(blogPost.createdAt).getTime();
+  const seconds = Math.floor((now - then) / 1000);
+  if (Math.floor(seconds / 31536000) >= 1) {
+    return `${Math.floor(seconds / 31536000)} years ago`;
+  }
+  if (Math.floor(seconds / 2592000) >= 1) {
+    return `${Math.floor(seconds / 2592000)} months ago`;
+  }
+  if (Math.floor(seconds / 86400) >= 1) {
+    return `${Math.floor(seconds / 86400)} days ago`;
+  }
+  if (Math.floor(seconds / 3600) >= 1) {
+    return `${Math.floor(seconds / 3600)} hours ago`;
+  }
+  if (Math.floor(seconds / 60) >= 1) {
+    return `${Math.floor(seconds / 60)} minutes ago`;
+  }
+  return `${Math.floor(seconds)} seconds ago`;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +78,7 @@ export interface BlogPostResponse extends Response {
 
 export class BlogService {
   private cache: BlogPostsResponse[] = [];
+  private blogPostCache: BlogPost[] = [];
   constructor(private http: HttpClient) { }
 
   async getBlogPosts(page: number): Promise<BlogPostsResponse> {
@@ -60,11 +86,15 @@ export class BlogService {
     if (cachedPage) return cachedPage;
     const posts: BlogPostsResponse = await this.http.get<BlogPostsResponse>(`${endpoint}/post?page=${page}`).toPromise();
     this.cache.push(posts);
+    posts.posts.forEach((post: BlogPost) => this.blogPostCache.push(post));
     return posts;
   }
 
   async getBlogPost(slug: string): Promise<BlogPostResponse> {
+    const a = this.blogPostCache.filter((post) => post.slug === slug)[0];
+    if (a) return { post: a, message: '' } as BlogPostResponse;
     const post = await this.http.get<BlogPostResponse>(`${endpoint}/post/slug/${slug}`).toPromise();
+    this.blogPostCache.push(post.post);
     return post;
   }
 

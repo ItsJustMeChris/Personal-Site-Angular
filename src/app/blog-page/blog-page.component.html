@@ -1,11 +1,15 @@
-<a href routerLink="/" class="close"><i class="fas fa-times"></i></a>
-<header>
-  <p class="titillium semibold title">{{ blogPost.post.title }}</p>
-  <div class="meta">
-    <p class="titillium time-ago">4 Months Ago</p>
-    <p class="titillium read-time">5 Minute Read</p>
-  </div>
-  <img src="{{ blogPost.post.image }}" alt="Image" />
-</header>
-<main [innerHtml]="blogPost.post.content"></main>
-<app-footer></app-footer>
+<ng-container *ngIf="blogPost">
+  <a href routerLink="/" class="close"><i class="fas fa-times"></i></a>
+  <header>
+    <p class="titillium semibold title">{{ blogPost.post.title }}</p>
+    <div class="meta">
+      <p class="titillium time-ago">{{ timeAgo(blogPost.post) }}</p>
+      <p class="titillium read-time">
+        {{ getReadTime(blogPost.post) }} min read
+      </p>
+    </div>
+    <img src="{{ blogPost.post.image }}" alt="Image" />
+  </header>
+  <main [innerHtml]="blogPost.post.content"></main>
+  <app-footer></app-footer>
+</ng-container>
