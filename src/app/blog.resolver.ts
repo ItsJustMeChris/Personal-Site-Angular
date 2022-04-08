@@ -1,20 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { BlogPostResponse, BlogPostsResponse, BlogService } from './blog.service';
+import {
+  Resolve,
+  RouterStateSnapshot,
+  ActivatedRouteSnapshot,
+} from '@angular/router';
+import {
+  BlogPostResponse,
+  BlogPostsResponse,
+  BlogService,
+} from './blog.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class BlogResolver implements Resolve<Array<BlogPostResponse | BlogPostsResponse>> {
+export class BlogResolver
+  implements Resolve<Array<BlogPostResponse | BlogPostsResponse>>
+{
+  constructor(private blogService: BlogService) {}
 
-  constructor(private blogService: BlogService) { }
-
-  public async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<any> {
+  public async resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<any> {
     const slug = route.paramMap.get('slug');
     if (slug) {
-      await this.blogService.getBlogPost(slug);
+      this.blogService.getBlogPost(slug);
       return true;
     }
-    return await this.blogService.getBlogPosts(0);
+    this.blogService.getBlogPosts(0);
+    return true;
   }
 }
