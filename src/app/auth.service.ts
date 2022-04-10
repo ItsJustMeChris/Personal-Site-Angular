@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import jwt_decode from 'jwt-decode';
 
-const endpoint = 'http://127.0.0.1:3000';
+const endpoint = 'https://api.itschris.dev';
 
 const httpOptions = {
   headers: new HttpHeaders({

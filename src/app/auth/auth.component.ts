@@ -24,8 +24,6 @@ export class AuthComponent {
     private formBuilder: FormBuilder,
     private router: Router
   ) {
-    this.authService.login('chris', 'password123');
-
     this.form = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
