@@ -4,7 +4,6 @@ import {
   BlogPost,
   BlogPostResponse,
   getReadTime,
-  timeAgo,
 } from '../blog.service';
 import { ActivatedRoute } from '@angular/router';
 import TimeAgo from 'javascript-time-ago';
@@ -36,9 +35,9 @@ export class BlogPageComponent implements OnInit {
 
   public getTimeAgo(time) {
     const date = new Date(time);
-    const userTimezoneOffset = date.getTimezoneOffset() * 60000;
+    // const userTimezoneOffset = date.getTimezoneOffset() * 60000;
 
-    return this.timeAgo.format(new Date(date.getTime() - userTimezoneOffset));
+    return this.timeAgo.format(new Date(date.getTime()));
   }
 
   async ngOnInit(): Promise<any> {

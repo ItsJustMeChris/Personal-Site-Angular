@@ -55,28 +55,6 @@ export function getReadTime(blogPost: BlogPost): number {
   return Math.ceil(blogPost.content.split(' ').length / 200);
 }
 
-export function timeAgo(blogPost: any): string {
-  const now = new Date().getTime();
-  const then = new Date(blogPost.created_at).getTime();
-  const seconds = Math.floor((now - then) / 1000);
-  if (Math.floor(seconds / 31536000) >= 1) {
-    return `${Math.floor(seconds / 31536000)} years ago`;
-  }
-  if (Math.floor(seconds / 2592000) >= 1) {
-    return `${Math.floor(seconds / 2592000)} months ago`;
-  }
-  if (Math.floor(seconds / 86400) >= 1) {
-    return `${Math.floor(seconds / 86400)} days ago`;
-  }
-  if (Math.floor(seconds / 3600) >= 1) {
-    return `${Math.floor(seconds / 3600)} hours ago`;
-  }
-  if (Math.floor(seconds / 60) >= 1) {
-    return `${Math.floor(seconds / 60)} minutes ago`;
-  }
-  return `${Math.floor(seconds)} seconds ago`;
-}
-
 function slugify(str) {
   str = str.replace(/^\s+|\s+$/g, '');
 
@@ -111,7 +89,11 @@ export class BlogService {
   private blogPostCache: BlogPost[] = [];
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  async createBlogPost(title: string, content: string): Promise<any> {
+  async createBlogPost(
+    title: string,
+    content: string,
+    image: string
+  ): Promise<any> {
     if (!this.authService.access_token) {
       return false;
     }
@@ -121,6 +103,7 @@ export class BlogService {
         {
           title,
           content,
+          image,
           slug: slugify(title),
         },
         {

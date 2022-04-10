@@ -9,7 +9,7 @@ import {
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
-import { BlogPost, getReadTime, timeAgo } from '../blog.service';
+import { BlogPost, getReadTime } from '../blog.service';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 
@@ -42,9 +42,9 @@ export class BlogCardComponent {
 
   public getTimeAgo(time) {
     const date = new Date(time);
-    const userTimezoneOffset = date.getTimezoneOffset() * 60000;
+    // const userTimezoneOffset = date.getTimezoneOffset() * 60000;
 
-    return this.timeAgo.format(new Date(date.getTime() - userTimezoneOffset));
+    return this.timeAgo.format(new Date(date.getTime()));
   }
 
   @HostListener('click', ['$event'])

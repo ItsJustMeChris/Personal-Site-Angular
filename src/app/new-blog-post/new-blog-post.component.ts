@@ -31,6 +31,7 @@ export class NewBlogPostComponent {
         Validators.required,
         Validators.minLength(6),
       ]),
+      image: new FormControl('', Validators.required),
       content: new FormControl('', Validators.required),
     });
   }
@@ -39,16 +40,16 @@ export class NewBlogPostComponent {
     const targ = e.target as HTMLInputElement;
     const file = targ.files[0];
     const fileURL = await this.uploadService.upload(file, file.name);
+    this.form.get('image').setValue(fileURL);
   }
 
   async onSubmit(form: FormGroup) {
-    console.log(form.get('title').errors);
     if (!this.form.valid) {
       return;
     }
 
-    const { title, content } = form.value;
+    const { title, content, image } = form.value;
 
-    const post = await this.blogService.createBlogPost(title, content);
+    const post = await this.blogService.createBlogPost(title, content, image);
   }
 }
