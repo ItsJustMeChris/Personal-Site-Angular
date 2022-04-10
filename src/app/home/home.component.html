@@ -1,3 +1,8 @@
+<section *ngIf="this.authService.getAccessToken()" class="nav titillium bold">
+  <ul>
+    <li><a routerLink="/blog/new">New Post</a></li>
+  </ul>
+</section>
 <app-header></app-header>
 <app-blog></app-blog>
 <app-footer></app-footer>

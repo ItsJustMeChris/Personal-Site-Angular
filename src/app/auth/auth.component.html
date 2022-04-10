@@ -1,0 +1,47 @@
+<div class="container">
+  <h3 class="titillium bold">Welcome back</h3>
+
+  <form (submit)="onSubmit(form)" [formGroup]="form">
+    <div style="display: flex; flex-direction: column">
+      <p class="form-error" *ngIf="invalidLogin">
+        Username or Password is invalid
+      </p>
+      <input
+        class="titillium"
+        type="text"
+        placeholder="Username or Email"
+        formControlName="username"
+      />
+      <p
+        class="form-error"
+        *ngIf="
+          form.get('username').touched &&
+          form.get('username').hasError('required')
+        "
+      >
+        Username or Email is required
+      </p>
+      <input
+        class="titillium"
+        type="password"
+        placeholder="Password"
+        name=""
+        id=""
+        formControlName="password"
+      />
+      <p
+        class="form-error"
+        *ngIf="
+          form.get('password').touched &&
+          form.get('password').hasError('required')
+        "
+      >
+        Password is required
+      </p>
+      <button type="submit">
+        <span class="titillium semibold">Login</span>
+        <i style="margin-left: 1em" class="fas fa-sign-in-alt"></i>
+      </button>
+    </div>
+  </form>
+</div>

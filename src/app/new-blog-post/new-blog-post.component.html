@@ -1,0 +1,30 @@
+<form [formGroup]="form" (submit)="onSubmit(form)">
+  <input
+    class="title"
+    type="text"
+    formControlName="title"
+    placeholder="Title"
+  />
+  <input hidden type="file" #uploader (change)="uploadFile($event)" />
+  <button
+    style="margin-top: unset; margin-bottom: 1em"
+    (click)="uploader.click()"
+  >
+    Select post image
+  </button>
+  <p
+    class="form-error"
+    *ngIf="form.get('title').touched && form.get('title').hasError('required')"
+  >
+    Title is required
+  </p>
+  <p
+    class="form-error"
+    *ngIf="form.get('title').touched && form.get('title').hasError('minlength')"
+  >
+    Title is too short
+  </p>
+  <quill-editor formControlName="content"></quill-editor>
+
+  <button type="submit">Submit</button>
+</form>

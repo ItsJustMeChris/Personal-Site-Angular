@@ -1,0 +1,17 @@
+section.nav ul {
+  display: unset;
+  padding: unset;
+  margin: unset;
+  list-style: none;
+}
+
+section.nav {
+  display: flex;
+  justify-content: end;
+  margin-right: 1em;
+}
+
+section.nav a {
+  text-decoration: unset;
+  color: #e5979a;
+}

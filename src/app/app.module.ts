@@ -8,9 +8,16 @@ import { BlogCardComponent } from './blog-card/blog-card.component';
 import { BlogComponent } from './blog/blog.component';
 import { HomeComponent } from './home/home.component';
 import { TyperComponent } from './typer/typer.component';
-import { BlogPageComponent } from './blog-page/blog-page.component';
+import {
+  BlogPageComponent,
+  SafeHtmlPipe,
+} from './blog-page/blog-page.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthComponent } from './auth/auth.component';
+import { NewBlogPostComponent } from './new-blog-post/new-blog-post.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -21,14 +28,21 @@ import { HeaderComponent } from './header/header.component';
     TyperComponent,
     BlogPageComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    AuthComponent,
+    NewBlogPostComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    QuillModule.forRoot({
+      modules: {},
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

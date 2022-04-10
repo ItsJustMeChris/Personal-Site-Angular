@@ -1,12 +1,7 @@
-<!-- <ng-container *ngIf="blogPosts">
+<ng-container *ngIf="blogPosts">
   <app-blog-card
-    *ngFor="
-      let post of blogPosts.posts;
-      index as i;
-      even as isEven;
-      odd as isOdd
-    "
+    *ngFor="let post of blogPosts; index as i; even as isEven; odd as isOdd"
     [class]="isEven ? 'dark' : 'light'"
     [blogPost]="post"
   ></app-blog-card>
-</ng-container> -->
+</ng-container>

@@ -8,7 +8,7 @@
 <div class="right">
   <p class="titillium title">{{ blogPost.title }}</p>
   <div class="meta">
-    <p class="titillium smaller">{{ timeAgo(blogPost) }}</p>
+    <p class="titillium smaller">{{ getTimeAgo(blogPost.created_at) }}</p>
     <p class="titillium smaller">{{ getReadTime(blogPost) }} min read</p>
   </div>
 </div>

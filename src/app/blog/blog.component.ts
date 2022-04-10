@@ -8,9 +8,7 @@ import { BlogService, BlogPost, BlogPostsResponse } from '../blog.service';
   styleUrls: ['./blog.component.css'],
 })
 export class BlogComponent implements OnInit {
-  blogPosts: Partial<BlogPostsResponse> = {
-    posts: [],
-  };
+  blogPosts: Partial<any[]> = [];
   loadedPosts: Promise<boolean>;
 
   constructor(
@@ -23,9 +21,9 @@ export class BlogComponent implements OnInit {
   // Once loaded, we load the page of blog posts, filter out and reorder based on time,
   // If slug is not found, we navigate to the 404 page, not just replace the location since, this is a missing page.
   async ngOnInit(): Promise<any> {
-    // this.blog.getBlogPosts(0).then((posts) => {
-    //   this.blogPosts = posts;
-    // });
+    this.blog.getBlogPosts(0).then((posts) => {
+      this.blogPosts = posts;
+    });
     this.loadedPosts = Promise.resolve(true);
   }
 }
