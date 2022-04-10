@@ -27,8 +27,16 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   getAccessToken(): boolean {
+    console.log(134);
     const access_token = localStorage.getItem('access_token');
-    if (access_token) {
+    console.log('access_token', access_token);
+    if (
+      access_token !== 'undefined' &&
+      access_token !== null &&
+      access_token !== undefined &&
+      access_token
+    ) {
+      console.log('here');
       const decoded: any = jwt_decode(access_token);
       if (decoded.exp > Date.now() / 1000) {
         this.access_token = access_token;
@@ -47,6 +55,9 @@ export class AuthService {
         })
         .toPromise();
 
+      if (!response.access_token) {
+        return false;
+      }
       this.access_token = response.access_token;
 
       localStorage.setItem('access_token', this.access_token);
