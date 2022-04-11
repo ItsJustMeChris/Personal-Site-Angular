@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public trakt: any = null;
   public artistsString: any = null;
   public ticker: any = null;
+  public messages: string[] = ['Hey,', 'Hello,', 'Hi,', "What's up,"];
 
   constructor(
     private spotifyService: SpotifyService,
