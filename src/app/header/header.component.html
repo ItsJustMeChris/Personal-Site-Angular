@@ -4,15 +4,15 @@
     My name's <span class="titillium bold tint">Chris</span>
   </p>
 </section>
-<!-- <section *ngIf="song" class="middle">
+<section *ngIf="song" class="middle">
   <p>
     <span class="titillium">Now Playing</span>
   </p>
-  <a class="tint titillium semibold" [href]="song?.external_urls?.spotify"
+  <a class="tint titillium semibold" [href]="song?.url"
     ><i class="fas fa-headphones-alt mr semibold"></i>{{ song.name }}</a
   >
-  <p class="titillium">By: {{ artistsString }}</p>
-</section> -->
+  <p class="titillium">By: {{ song?.artist?.name }}</p>
+</section>
 <section class="bottom">
   <div class="left">
     <p class="large titillium semibold">

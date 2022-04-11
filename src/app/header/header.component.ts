@@ -4,14 +4,14 @@ import { SpotifyService } from '../spotify.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   public song: any = null;
   public artistsString: any = null;
   public ticker: any = null;
 
-  constructor(private spotifyService: SpotifyService) { }
+  constructor(private spotifyService: SpotifyService) {}
 
   ngOnDestroy() {
     if (this.ticker) {
@@ -19,6 +19,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  async ngOnInit() { }
-
+  async ngOnInit() {
+    const s = await this.spotifyService.getNowPlaying();
+    if (s.tracks[0].nowplaying) {
+      this.song = s.tracks[0];
+    }
+    this.ticker = setInterval(async () => {
+      const s = await this.spotifyService.getNowPlaying();
+      if (s.tracks[0].nowplaying) {
+        this.song = s.tracks[0];
+      }
+    }, 30000);
+  }
 }

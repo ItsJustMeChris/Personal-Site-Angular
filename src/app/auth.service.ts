@@ -23,6 +23,7 @@ export interface User {
 })
 export class AuthService {
   public access_token: string = undefined;
+  private refreshTicker: number = undefined;
 
   constructor(private http: HttpClient) {}
 
@@ -37,10 +38,55 @@ export class AuthService {
       const decoded: any = jwt_decode(access_token);
       if (decoded.exp > Date.now() / 1000) {
         this.access_token = access_token;
+        this.startTicker();
         return true;
       }
     }
     return false;
+  }
+
+  async refreshAccessToken() {
+    const response: any = await this.http
+      .post(
+        `${endpoint}/auth/refresh`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${this.access_token}`,
+          },
+        }
+      )
+      .toPromise();
+
+    if (!response.access_token) {
+      return;
+    }
+
+    this.access_token = response.access_token;
+
+    this.startTicker();
+
+    localStorage.setItem('access_token', this.access_token);
+  }
+
+  watchAccessToken(access_token: string) {
+    const decoded: any = jwt_decode(access_token);
+    // if token is within 10 minutes of expiring, refresh it
+    if (decoded.exp * 1000 - Date.now() < 10 * 60 * 1000) {
+      this.refreshAccessToken();
+      clearInterval(this.refreshTicker);
+      this.refreshTicker = undefined;
+    }
+  }
+
+  startTicker() {
+    if (this.refreshTicker) {
+      clearInterval(this.refreshTicker);
+      this.refreshTicker = undefined;
+    }
+    this.refreshTicker = setInterval(() => {
+      this.watchAccessToken(this.access_token);
+    });
   }
 
   async login(username: string, password: string): Promise<boolean> {
@@ -56,6 +102,8 @@ export class AuthService {
         return false;
       }
       this.access_token = response.access_token;
+
+      this.startTicker();
 
       localStorage.setItem('access_token', this.access_token);
       return true;
