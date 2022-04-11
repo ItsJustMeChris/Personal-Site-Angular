@@ -1,5 +1,15 @@
 <ng-container *ngIf="blogPost">
-  <a href routerLink="/" class="close"><i class="fas fa-times"></i></a>
+  <div class="actions">
+    <a
+      class="edit"
+      href
+      *ngIf="this.authService.getAccessToken()"
+      [routerLink]="['/blog', blogPost.slug, 'edit']"
+      style="margin-right: 0.5em"
+      ><i class="fas fa-edit"></i
+    ></a>
+    <a class="close" href routerLink="/"><i class="fas fa-times"></i></a>
+  </div>
   <header>
     <p class="titillium semibold title">{{ blogPost.title }}</p>
     <div class="meta">

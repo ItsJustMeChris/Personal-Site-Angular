@@ -19,20 +19,36 @@ import { UploadService } from '../uploads.service';
 })
 export class NewBlogPostComponent {
   public form: FormGroup;
+  public post: any;
 
   constructor(
     private blogService: BlogService,
     private formBuilder: FormBuilder,
     private uploadService: UploadService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    this.form = new FormGroup({
-      title: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
-      image: new FormControl('', Validators.required),
-      content: new FormControl('', Validators.required),
+    this.route.params.subscribe((params) => {
+      if (params.slug) {
+        this.blogService.getBlogPost(params.slug).then((post) => {
+          this.post = post;
+
+          this.form = this.formBuilder.group({
+            title: [post.title, Validators.required],
+            content: [post.content, Validators.required],
+            image: [post.image, Validators.required],
+          });
+        });
+      } else {
+        this.form = new FormGroup({
+          title: new FormControl('', [
+            Validators.required,
+            Validators.minLength(6),
+          ]),
+          image: new FormControl('', Validators.required),
+          content: new FormControl('', Validators.required),
+        });
+      }
     });
   }
 
@@ -50,6 +66,17 @@ export class NewBlogPostComponent {
 
     const { title, content, image } = form.value;
 
-    const post = await this.blogService.createBlogPost(title, content, image);
+    if (this.post) {
+      this.post = await this.blogService.updateBlogPost(
+        this.post.slug,
+        title,
+        content,
+        image
+      );
+      this.router.navigate(['/blog', this.post.slug]);
+    } else {
+      const post = await this.blogService.createBlogPost(title, content, image);
+      this.router.navigate(['/blog', post.slug]);
+    }
   }
 }

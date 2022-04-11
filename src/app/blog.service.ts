@@ -116,6 +116,34 @@ export class BlogService {
     return post;
   }
 
+  async updateBlogPost(
+    slug: string,
+    title: string,
+    content: string,
+    image: string
+  ): Promise<any> {
+    if (!this.authService.access_token) {
+      return false;
+    }
+    const post: any = await this.http
+      .patch<any>(
+        `${endpoint}/posts/${slug}`,
+        {
+          title,
+          content,
+          image,
+          slug: slugify(title),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.authService.access_token}`,
+          },
+        }
+      )
+      .toPromise();
+    return post;
+  }
+
   async getBlogPosts(page: number): Promise<any> {
     const posts: any[] = await this.http
       .get<any[]>(`${endpoint}/posts`)

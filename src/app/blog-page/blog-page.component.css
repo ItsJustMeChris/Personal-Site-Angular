@@ -1,77 +1,85 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    background: #FFCDB2;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffcdb2;
+  min-height: 100vh;
 }
 
 header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-right: 5%;
-    padding-left: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 5%;
+  padding-left: 5%;
 }
 
 p.title {
-    font-size: 2.5em;
-    line-height: 1em;
-    margin: unset;
-    margin-top: 1em;
-    text-align: center;
+  font-size: 2.5em;
+  line-height: 1em;
+  margin: unset;
+  margin-top: 1em;
+  text-align: center;
 }
 
 p {
-    color: #6D6875;
+  color: #6d6875;
 }
 
 .meta {
-    display: flex;
-    width: 250px;
-    justify-content: space-between;
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
 }
 
 header img {
-    object-fit: cover;
-    height: 200px;
-    width: 70%;
+  object-fit: cover;
+  height: 200px;
+  width: 70%;
 }
 
 main {
-    margin-top: 3em;
-    padding-left: 5%;
-    padding-right: 5%;
-    font-family: 'Titillium';
-    min-height: 100vh;
+  margin-top: 3em;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-family: "Titillium";
+  min-height: 100vh;
 }
 
 main >>> img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 main >>> p {
-    font-size: 1.3em;
-    line-height: 1.6em;
-    color: #6D6875;
+  font-size: 1.3em;
+  line-height: 1.6em;
+  color: #6d6875;
 }
 
-.close {
-    display: block;
-    position: absolute;
-    right: 0.5em;
-    top: 0.5em;
-    border: unset;
-    background: unset;
-    color: #FFFFFF;
-    font-size: 2em;
-    cursor: pointer;
-    transition: .2s;
+.actions {
+  display: block;
+  position: absolute;
+  right: 1em;
+  top: 0.2em;
 }
 
-a.close:hover {
-    transition: .2s;
-    color: #ff6961;
+.actions a {
+  border: unset;
+  background: unset;
+  color: #ffffff;
+  font-size: 2em;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.actions a.close:hover {
+  transition: 0.2s;
+  color: #ff6961;
+}
+
+.actions a.edit:hover {
+  transition: 0.2s;
+  color: #e5989b;
 }

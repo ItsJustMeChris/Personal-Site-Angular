@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { NewBlogPostComponent } from './new-blog-post/new-blog-post.component';
 import { QuillModule } from 'ngx-quill';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { QuillModule } from 'ngx-quill';
       modules: {},
     }),
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import TimeAgo from 'javascript-time-ago';
 
 import { DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from '../auth.service';
 
 @Pipe({ name: 'safeHTML' })
 export class SafeHtmlPipe implements PipeTransform {
@@ -29,7 +30,11 @@ export class BlogPageComponent implements OnInit {
   public getReadTime = getReadTime;
   public timeAgo = new TimeAgo('en-US');
 
-  constructor(blog: BlogService, private route: ActivatedRoute) {
+  constructor(
+    blog: BlogService,
+    private route: ActivatedRoute,
+    public authService: AuthService
+  ) {
     this.blog = blog;
   }
 
