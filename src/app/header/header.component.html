@@ -4,14 +4,41 @@
     My name's <span class="titillium bold tint">Chris</span>
   </p>
 </section>
-<section *ngIf="song" class="middle">
-  <p>
-    <span class="titillium">Now Playing</span>
-  </p>
-  <a class="tint titillium semibold" [href]="song?.url"
-    ><i class="fas fa-headphones-alt mr semibold"></i>{{ song.name }}</a
-  >
-  <p class="titillium">By: {{ song?.artist?.name }}</p>
+<section class="middle">
+  <div *ngIf="song">
+    <p>
+      <span class="titillium">Now Playing</span>
+    </p>
+    <a class="tint titillium semibold" [href]="song?.url"
+      ><i class="fas fa-headphones-alt mr semibold"></i>{{ song.name }}</a
+    >
+    <p class="titillium">By: {{ song?.artist?.name }}</p>
+  </div>
+
+  <div *ngIf="trakt && trakt.type === 'episode'">
+    <p>
+      <span class="titillium">Now Watching</span>
+    </p>
+    <a
+      class="tint titillium semibold"
+      [href]="'https://imdb.com/title/' + trakt.show.ids.imdb"
+      ><i class="fas fa-tv mr semibold"></i>{{ trakt.show.title }}</a
+    >
+    <p class="titillium">
+      Season {{ trakt.episode.season }} Episode {{ trakt.episode.number }}:
+      {{ trakt.episode.title }}
+    </p>
+  </div>
+  <div *ngIf="trakt && trakt.type === 'movie'">
+    <p>
+      <span class="titillium">Now Watching</span>
+    </p>
+    <a
+      class="tint titillium semibold"
+      [href]="'https://imdb.com/title/' + trakt.movie.ids.imdb"
+      ><i class="fas fa-tv mr semibold"></i>{{ trakt.movie.title }}</a
+    >
+  </div>
 </section>
 <section class="bottom">
   <div class="left">
