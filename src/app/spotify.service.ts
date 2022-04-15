@@ -24,7 +24,7 @@ export class SpotifyService {
 
   async getNowPlaying(): Promise<any> {
     const songInfo = await this.http
-      .get<any>(`${endpoint}/tools/lastfm`)
+      .get<any>(`${endpoint}/integrations/lastfm`)
       .toPromise();
     return songInfo;
   }

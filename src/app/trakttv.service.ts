@@ -24,7 +24,7 @@ export class TraktTVService {
 
   async getNowPlaying(): Promise<any> {
     const songInfo = await this.http
-      .get<any>(`${endpoint}/tools/trakttv`)
+      .get<any>(`${endpoint}/integrations/trakttv`)
       .toPromise();
     return songInfo;
   }
