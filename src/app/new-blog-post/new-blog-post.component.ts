@@ -12,6 +12,11 @@ import { BlogService, BlogPost, BlogPostsResponse } from '../blog.service';
 import Quill from 'quill';
 import { UploadService } from '../uploads.service';
 
+import { VideoHandler, ImageHandler, Options } from 'ngx-quill-upload';
+
+Quill.register('modules/imageHandler', ImageHandler);
+Quill.register('modules/videoHandler', VideoHandler);
+
 @Component({
   selector: 'app-new-blog-post',
   templateUrl: './new-blog-post.component.html',
@@ -20,6 +25,70 @@ import { UploadService } from '../uploads.service';
 export class NewBlogPostComponent {
   public form: FormGroup;
   public post: any;
+
+  public modules = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      ['blockquote', 'code-block'],
+      ['image', 'video'],
+    ],
+    imageHandler: {
+      upload: (file) => {
+        return new Promise((resolve, reject) => {
+          if (file.type.includes('image')) {
+            if (file.size < 1000000) {
+              const uploadData = new FormData();
+              uploadData.append('file', file, file.name);
+
+              return this.uploadService
+                .upload(file, file.name)
+                .then((result) => {
+                  resolve(result);
+                })
+                .catch((error) => {
+                  reject('Upload failed');
+                  console.error('Error:', error);
+                });
+            } else {
+              reject('Size too large');
+            }
+          } else {
+            reject('Unsupported type');
+          }
+        });
+      },
+      accepts: ['png', 'jpg', 'jpeg', 'jfif'],
+    } as Options,
+    videoHandler: {
+      upload: (file) => {
+        return new Promise((resolve, reject) => {
+          if (file.type.includes('video')) {
+            if (file.size < 1000000) {
+              const uploadData = new FormData();
+              uploadData.append('file', file, file.name);
+
+              return this.uploadService
+                .upload(file, file.name)
+                .then((result) => {
+                  resolve(result);
+                })
+                .catch((error) => {
+                  reject('Upload failed');
+                  console.error('Error:', error);
+                });
+            } else {
+              reject('Size too large');
+            }
+          } else {
+            reject('Unsupported type');
+          }
+        });
+      },
+      accepts: ['mpeg', 'avi'],
+    } as Options,
+  };
 
   constructor(
     private blogService: BlogService,

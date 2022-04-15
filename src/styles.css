@@ -1,7 +1,6 @@
-@import '~quill/dist/quill.core.css';
-@import '~quill/dist/quill.bubble.css';
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.bubble.css";
 @import "~quill/dist/quill.snow.css";
-
 
 body,
 html {
@@ -111,4 +110,9 @@ html {
 }
 .titillium.thin {
   font-weight: 100;
+}
+
+.ql-container {
+  max-height: 60vh;
+  overflow: scroll;
 }
