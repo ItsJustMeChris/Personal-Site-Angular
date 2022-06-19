@@ -38,7 +38,7 @@ export class NewBlogPostComponent {
       upload: (file) => {
         return new Promise((resolve, reject) => {
           if (file.type.includes('image')) {
-            if (file.size < 1000000) {
+            if (file.size < 100000000) {
               const uploadData = new FormData();
               uploadData.append('file', file, file.name);
 
@@ -65,7 +65,7 @@ export class NewBlogPostComponent {
       upload: (file) => {
         return new Promise((resolve, reject) => {
           if (file.type.includes('video')) {
-            if (file.size < 1000000) {
+            if (file.size < 100000000) {
               const uploadData = new FormData();
               uploadData.append('file', file, file.name);
 
